@@ -1,0 +1,25 @@
+.login-form {
+
+  .remember {
+    width: 45%;
+    float: left;
+    text-align: left;
+    line-height: 30px;
+    height: 40px;
+
+    label {
+      font-weight: initial;
+      margin-left: 5px;
+    }
+  }
+
+  .forgot {
+    width: 45%;
+    float: right;
+    text-align: right;
+    font-weight: bold;
+    line-height: 30px;
+    height: 40px;
+  }
+
+}
