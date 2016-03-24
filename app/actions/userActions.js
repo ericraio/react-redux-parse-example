@@ -26,6 +26,25 @@ function loginFailure(error) {
   };
 }
 
+function logoutRequest() {
+  return {
+    type: types.LOGOUT_REQUEST
+  };
+}
+
+function logoutSuccess(user) {
+  return {
+    type: types.LOGOUT_SUCCESS
+  };
+}
+
+function logoutFailure(error) {
+  return {
+    type: types.LOGOUT_FAILURE,
+    payload: error
+  };
+}
+
 function forgotPasswordRequest() {
   return {
     type: types.FORGOT_PASSWORD_REQUEST
@@ -80,6 +99,21 @@ export function login(email, password, rememberMe = false) {
       error(user, error) {
         dispatch(loginFailure(error));
       }
+    });
+  };
+}
+
+export function logout() {
+  return dispatch => {
+    window.localStorage.clear();
+    dispatch(logoutRequest());
+    let promise = User.logOut();
+    promise
+    .done(function() {
+      dispatch(logoutSuccess());
+    })
+    .fail(function() {
+      dispatch(logoutFailure());
     });
   };
 }

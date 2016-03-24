@@ -9,6 +9,7 @@ class Application extends Component {
     if(this.props.user.get('isNormalUser')) {
       return (
         <li role="navigation" className={this.props.location.pathname === `/resources` ? 'active' : ''}><Link to={`/resources`}>Resources</Link></li>
+        <li role="navigation"><Link to={`/logout`}>Logout</Link></li>
       );
     } else {
       return null;

@@ -21,6 +21,7 @@ Parse.initialize(AppConfig.ParseApplicationId, AppConfig.ParseJavaScriptKey);
 const {
   Root,
   Login,
+  Logout,
   ForgotPassword,
   About,
   Profile,
@@ -49,21 +50,21 @@ if(!cookie.load('sessionTimer')) {
 }
 
 function requireLoggedIn(nextState, replace) {
-  if (!store.getState().user.get('current')) {
-    replace({
-      pathname: '/login',
-      state: { nextPathname: nextState.location.pathname }
-    })
-  }
+  //if (!store.getState().user.get('current')) {
+    //replace({
+      //pathname: '/login',
+      //state: { nextPathname: nextState.location.pathname }
+    //})
+  //}
 }
 
 function requireLoggedOut(nextState, replace) {
-  if (store.getState().user.get('current')) {
-    replace({
-      pathname: '/profile',
-      state: { nextPathname: nextState.location.pathname }
-    })
-  }
+  //if (store.getState().user.get('current')) {
+    //replace({
+      //pathname: '/profile',
+      //state: { nextPathname: nextState.location.pathname }
+    //})
+  //}
 }
 
 class App extends Component {
@@ -73,6 +74,7 @@ class App extends Component {
         <Router history={history}>
           <Route path={`/`} component={Root} />
           <Route path={`/login`} component={Login} onEnter={requireLoggedOut} />
+          <Route path={`/logout`} component={Logout} onEnter={requireLoggedIn} />
           <Route path={`/forgot-password`} component={ForgotPassword} onEnter={requireLoggedOut} />
 
           <Route component={Application} onEnter={requireLoggedIn}>

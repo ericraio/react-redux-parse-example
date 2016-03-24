@@ -15,17 +15,22 @@ const InitialState = Record({
 });
 
 export default function userReducer(state = new InitialState, action) {
-
-  switch (action.type) {
+  switch(action.type) {
     case types.LOGIN_REQUEST:
     case types.LOGIN_SUCCESS:
     case types.LOGIN_FAILURE:
+    case types.LOGOUT_REQUEST:
+    case types.LOGOUT_SUCCESS:
+    case types.LOGOUT_FAILURE:
     case types.FORGOT_PASSWORD_REQUEST:
     case types.FORGOT_PASSWORD_SUCCESS:
     case types.FORGOT_PASSWORD_FAILURE:
     case types.REMEMBER_ME:
       state = state.set('state', action.type);
+      break;
+  }
 
+  switch (action.type) {
     case types.LOGIN_SUCCESS:
       return state.set('isRequesting', false)
                   .set('current', action.payload);
@@ -42,6 +47,7 @@ export default function userReducer(state = new InitialState, action) {
       return state.set('isNormalUser', action.payload);
 
     case types.LOGIN_FAILURE:
+    case types.LOGOUT_FAILURE:
     case types.FORGOT_PASSWORD_FAILURE:
       return state.set('isRequesting', false)
                   .set('code', action.payload.code)
